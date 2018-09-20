@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import Router from './Router';
 
 class App extends Component {
   componentWillMount() {
-    const config = {
-      apiKey: 'AIzaSyBR4FTGiOcTZ5OBNi6thE0KhCDR3PaOtQM',
-      authDomain: 'manager-2328b.firebaseapp.com',
-      databaseURL: 'https://manager-2328b.firebaseio.com',
-      storageBucket: 'manager-2328b.appspot.com',
-      messagingSenderId: '193075244299'
+    var config = {
+      apiKey: 'AIzaSyCTYH1dbdEaY2zh9tNMRT1CBqSDQcwQnBw',
+      authDomain: 'authorization-5066d.firebaseapp.com',
+      databaseURL: 'https://authorization-5066d.firebaseio.com',
+      projectId: 'authorization-5066d',
+      storageBucket: 'authorization-5066d.appspot.com',
+      messagingSenderId: '780587295236'
     };
-
     firebase.initializeApp(config);
   }
 
