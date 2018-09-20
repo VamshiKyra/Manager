@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import { Actions } from 'react-native-router-flux';
 import {
   EMAIL_CHANGED,
@@ -8,14 +8,14 @@ import {
   LOGIN_USER
 } from './types';
 
-export const emailChanged = (text) => {
+export const emailChanged = text => {
   return {
     type: EMAIL_CHANGED,
     payload: text
   };
 };
 
-export const passwordChanged = (text) => {
+export const passwordChanged = text => {
   return {
     type: PASSWORD_CHANGED,
     payload: text
@@ -23,22 +23,26 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = ({ email, password }) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: LOGIN_USER });
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
 
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
           .then(user => loginUserSuccess(dispatch, user))
           .catch(() => loginUserFail(dispatch));
       });
   };
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = dispatch => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
 
